@@ -30,20 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             this.grpKategori = new System.Windows.Forms.GroupBox();
-            this.grpIcerik = new System.Windows.Forms.GroupBox();
             this.treeKategori = new System.Windows.Forms.TreeView();
+            this.grpIcerik = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.metinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.grpKategori.SuspendLayout();
             this.grpIcerik.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -59,6 +62,14 @@
             this.grpKategori.TabStop = false;
             this.grpKategori.Text = "Kategori";
             // 
+            // treeKategori
+            // 
+            this.treeKategori.Location = new System.Drawing.Point(6, 19);
+            this.treeKategori.Name = "treeKategori";
+            this.treeKategori.Size = new System.Drawing.Size(188, 405);
+            this.treeKategori.TabIndex = 0;
+            this.treeKategori.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeKategori_AfterSelect);
+            // 
             // grpIcerik
             // 
             this.grpIcerik.Controls.Add(this.listView1);
@@ -68,14 +79,6 @@
             this.grpIcerik.TabIndex = 1;
             this.grpIcerik.TabStop = false;
             this.grpIcerik.Text = "İçerik";
-            // 
-            // treeKategori
-            // 
-            this.treeKategori.Location = new System.Drawing.Point(6, 19);
-            this.treeKategori.Name = "treeKategori";
-            this.treeKategori.Size = new System.Drawing.Size(188, 405);
-            this.treeKategori.TabIndex = 0;
-            this.treeKategori.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeKategori_AfterSelect);
             // 
             // listView1
             // 
@@ -105,26 +108,39 @@
             this.toolStripMenuItem4,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 114);
             this.contextMenuStrip1.Text = "Yeniden Adlandır";
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox1});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem1.Text = "Yeniden Adlandır";
             // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
+            // 
             // toolStripMenuItem2
             // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox2});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem2.Text = "Alt Kategori Ekle...";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
-            // toolStripMenuItem3
+            // toolStripTextBox2
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(169, 22);
-            this.toolStripMenuItem3.Text = "Sil";
+            this.toolStripTextBox2.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.toolStripTextBox2.Name = "toolStripTextBox2";
+            this.toolStripTextBox2.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox2.Enter += new System.EventHandler(this.toolStripTextBox2_Enter);
             // 
             // toolStripMenuItem4
             // 
@@ -140,26 +156,34 @@
             // metinToolStripMenuItem
             // 
             this.metinToolStripMenuItem.Name = "metinToolStripMenuItem";
-            this.metinToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.metinToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.metinToolStripMenuItem.Text = "Metin";
+            this.metinToolStripMenuItem.Click += new System.EventHandler(this.metinToolStripMenuItem_Click);
             // 
             // pdfToolStripMenuItem
             // 
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
-            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.pdfToolStripMenuItem.Text = "Pdf";
+            this.pdfToolStripMenuItem.Click += new System.EventHandler(this.pdfToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.videoToolStripMenuItem.Text = "Video";
             // 
             // sesToolStripMenuItem
             // 
             this.sesToolStripMenuItem.Name = "sesToolStripMenuItem";
-            this.sesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sesToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.sesToolStripMenuItem.Text = "Ses";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(169, 22);
+            this.toolStripMenuItem3.Text = "Sil";
             // 
             // Form1
             // 
@@ -195,6 +219,9 @@
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sesToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
     }
 }
 

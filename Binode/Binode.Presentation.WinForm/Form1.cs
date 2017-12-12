@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Binode.Presentation.WinForm
         {
             foreach (var kategori in kategoriler)
             {
-                if(node is null)
+                if(node == null)
                 {
                     var nnode = new TreeNode(kategori.Isim);
                     nnode.ContextMenuStrip = contextMenuStrip1;
@@ -99,5 +100,76 @@ namespace Binode.Presentation.WinForm
                 }
             }
         }
+
+        private void metinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metin mtn = new metin();
+            mtn.Show();
+        }
+
+        private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.Title = "Kayıt Yerinizi Seçiniz";
+                saveFileDialog1.Filter = "(*.pdf)|*.pdf";
+                saveFileDialog1.FilterIndex = 2;
+                saveFileDialog1.InitialDirectory = "C:\\";
+                saveFileDialog1.ShowDialog();
+                StreamWriter Kaydet = new StreamWriter(saveFileDialog1.FileName);
+                Kaydet.WriteLine(@""+(saveFileDialog1.FileName)+""+DateTime.Now);
+                Kaydet.Close();
+                MessageBox.Show("Kaynak oluşturuldu.");
+            }
+            catch
+            {
+                MessageBox.Show("Kaynak oluşturulamadı!");
+            }
+        }
+
+        private void toolStripTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (toolStripMenuItem1.Text == null)
+                return;
+            else
+            {
+                treeKategori.SelectedNode.Text = toolStripTextBox1.Text;
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox == null)
+                return;
+            TreeNode secilen;
+            secilen = treeKategori.SelectedNode;
+            secilen.Nodes.Add(textBox.Text);
+
+        }
+
+        private void toolStripTextBox2_Enter(object sender, EventArgs e)
+        {
+            //TreeNode secilen;
+            //secilen = treeKategori.SelectedNode;
+            //secilen.Nodes.Add(toolStripTextBox2.Text);
+        }
+
+        //private void toolStripTextBox2_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    TreeNode secilen;
+        //    secilen = treeKategori.SelectedNode;
+        //    secilen.Nodes.Add(toolStripTextBox2.Text);
+
+        //}
+
+        //private void toolStripTextBox2_TextChanged(object sender, EventArgs e)
+        //{
+        //    TreeNode secilen;
+        //    secilen = treeKategori.SelectedNode;
+        //    secilen.Nodes.Add(toolStripTextBox2.Text);
+
+        //}
+
     }
 }
